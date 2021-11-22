@@ -14,8 +14,8 @@
         <h1>Sign in</h1>
 
         <div>
-            <label>Username</label>
-            <input name="username" type="text">
+            <label>Username or email</label>
+            <input type="text" name="username_email" type="text">
         </div>
 
         <div>
@@ -27,7 +27,7 @@
            
     </form>
     
-    <script src="script/script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
