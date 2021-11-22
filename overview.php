@@ -7,6 +7,7 @@ try{
 
     $q = $db->prepare('SELECT * FROM topics');
     $q->execute();
+    $topics = $q->fetchAll();
 
 } catch(Exception $ex){
     _response(500, 'System under maintainance', __LINE__);
@@ -29,7 +30,9 @@ try{
         <div>
             <h2>Topic</h2>
             <div>
-                <?php while(){ ?>
+               <?php foreach($topics as $topic){ ?>
+                <p><?= $topic['topic_name'] ?></p>
+                <?php } ?>
             </div>
         </div>
 

@@ -1,8 +1,5 @@
 <?php
 
-define('_PASSWORD_MIN_LEN', 6);
-define('_PASSWORD_MAX_LEN', 20);
-
 // ##############################
 
 function _response($status, $error_message, $line = (-1)){
@@ -29,3 +26,5 @@ function _db(){
     ];
     return new PDO($database_connection, $database_user_name, $database_pasword, $database_options);
 }
+
+

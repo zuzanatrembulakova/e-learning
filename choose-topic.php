@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once(__DIR__.'/globals.php');
 
 try{
@@ -36,8 +38,18 @@ try{
                 </select>
             </div>
 
+            <div>
+                <input type="hidden" name="student_id" value="<?= $_SESSION['student']['student_id']; ?>">
+            </div>
+
             <button id="done_btn" onclick='chooseTopic()'>Next</button> 
     </form>
+
+    <script src="script.js"></script>
+    <script>
+        var dt = new Date();
+        document.getElementById('date_time').innerHTML=dt;
+    </script>
 
 </body>
 </html>
