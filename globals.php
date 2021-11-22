@@ -18,9 +18,9 @@ function _response($status, $error_message, $line = (-1)){
 
 // ##############################
 function _db(){
-    $database_user_name = 'amazon'; //  root FUDM40jA45oh6Ra0
-    $database_pasword = 'FUDM40jA45oh6Ra0'; // Lonpvet1 172.105.244.156
-    $database_connection = 'mysql:host=172.105.244.156; dbname=amazon; charset=utf8mb4';
+    $database_user_name = 'e-learning'; 
+    $database_pasword = 'w7*)Q2sjomo0!2kE';
+    $database_connection = 'mysql:host=172.105.244.156; dbname=e-learning; charset=utf8mb4';
 
     $database_options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
