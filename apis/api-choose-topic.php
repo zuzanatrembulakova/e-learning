@@ -2,6 +2,19 @@
 require_once(__DIR__.'/../globals.php');
 
 try {
+  $dbForum = _dbForum();
+
+  $insertOneResult = $dbForum->insertOne([
+    'username' => 'admin',
+    'email' => 'admin@example.com',
+    'name' => 'Admin User',
+ ]);
+
+} catch(Exception $ex){
+  _response(500, 'System under maintainance mongodb', __LINE__);
+}
+
+try {
     $db = _db();
 } catch(Exception $ex){
     _response(500, 'System under maintainance', __LINE__);

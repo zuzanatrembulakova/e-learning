@@ -27,4 +27,11 @@ function _db(){
     return new PDO($database_connection, $database_user_name, $database_pasword, $database_options);
 }
 
+function _dbForum(){
+    $client = new MongoDB\Client('mongodb+srv://user1:finalproject@e-learning.b2jtf.mongodb.net/e-learning?retryWrites=true&w=majority');
+    $collection = $client->forum->discussion;
+
+    return $collection;
+}
+
 
