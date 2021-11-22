@@ -28,3 +28,7 @@ async function chooseTopic(){
     }
 }
 
+function displayInput() {
+    document.querySelector("#your-question").style.display = "block"
+}
+
