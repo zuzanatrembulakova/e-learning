@@ -34,7 +34,7 @@ try{
                 <select name="tag">
                     <?php while($row = $q->fetch()){ ?>
                         <option value="<?= $row['topic_id'] ?>"><?= $row['topic_name'] ?></option>
-                        <?php } ?>
+                    <?php } ?>
                 </select>
             </div>
 
@@ -46,10 +46,6 @@ try{
     </form>
 
     <script src="script.js"></script>
-    <script>
-        var dt = new Date();
-        document.getElementById('date_time').innerHTML=dt;
-    </script>
-
+    
 </body>
 </html>

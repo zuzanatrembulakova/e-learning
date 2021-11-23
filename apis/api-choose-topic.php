@@ -1,31 +1,25 @@
 <?php
 require_once(__DIR__.'/../globals.php');
 
-// try {
-//   $dbForum = _dbForum();
-
-//   $insertOneResult = $dbForum->insertOne([
-//     'username' => 'admin',
-//     'email' => 'admin@example.com',
-//     'name' => 'Admin User',
-//  ]);
-
-// } catch(Exception $ex){
-//   _response(500, 'System under maintainance mongodb', __LINE__);
-// }
-
 try {
 
   $mng = _dbMongoManager();
 
-  $listdatabases = new MongoDB\Driver\Command(["listDatabases" => 1]);
-  $res = $mng->executeCommand("admin", $listdatabases);
+  // $bulk = new MongoDB\Driver\BulkWrite;
 
-  $databases = current($res->toArray());
+  // $doc = [
 
-  foreach ($databases->databases as $el) {
-      echo $el->name . "\n";
-  }
+  // 'clientName' => 'Raizel',
+
+  // 'email' => 'raizel@whatever.com',
+
+  // 'tag' => 'Admin User',
+
+  // ];
+
+  // $bulk->insert($doc);
+
+  // $result = $mng->executeBulkWrite('forum.discussion', $bulk);
 
 } catch (MongoDB\Driver\Exception\Exception $e) {
 
