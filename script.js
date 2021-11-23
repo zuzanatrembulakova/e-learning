@@ -28,6 +28,21 @@ async function chooseTopic(){
     }
 }
 
+async function signup(){
+    let connection = await fetch("apis/api-signup.php", {
+        method : "POST",
+        body : new FormData(document.querySelector("#form_sign_up"))
+    })
+    
+    let response = await connection.json()
+    console.log(response)
+    if( connection.ok ) { 
+        location.href = "student-login.php" 
+    } else {
+        alert(response['info'])
+    }
+}
+
 function displayInput() {
     document.querySelector("#your-question").style.display = "block"
 }
