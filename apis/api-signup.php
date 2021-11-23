@@ -40,6 +40,7 @@ try{
   if ($row) {
     _response(400,'User already exists'); 
   }
+
 } catch(Exception $ex){
   http_response_code(500);
   // echo 'System under maintainance';
@@ -48,13 +49,13 @@ try{
 
 try{
   // Insert data in the DB
-  $q = $db->prepare('INSERT INTO students VALUES(:student_id, :student_name, :student_surname, :student_username, :student_email)');
+  $q = $db->prepare('INSERT INTO students VALUES(:student_id, :student_name, :student_surname, :student_username, :student_password, :student_email)');
   $q->bindValue(":student_id", null); 
   $q->bindValue(":student_name", $_POST['name']);
   $q->bindValue(":student_surname", $_POST['surname']);
   $q->bindValue(":student_username", $_POST['username']);
-  $q->bindValue(":student_email", $_POST['email']);
   $q->bindValue(":student_password", $_POST['password']);
+  $q->bindValue(":student_email", $_POST['email']);
   $q->execute();
   $user_id = $db->lastInsertId();
   // SUCCESS
