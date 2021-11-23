@@ -1,17 +1,35 @@
 <?php
 require_once(__DIR__.'/../globals.php');
 
+// try {
+//   $dbForum = _dbForum();
+
+//   $insertOneResult = $dbForum->insertOne([
+//     'username' => 'admin',
+//     'email' => 'admin@example.com',
+//     'name' => 'Admin User',
+//  ]);
+
+// } catch(Exception $ex){
+//   _response(500, 'System under maintainance mongodb', __LINE__);
+// }
+
 try {
-  $dbForum = _dbForum();
 
-  $insertOneResult = $dbForum->insertOne([
-    'username' => 'admin',
-    'email' => 'admin@example.com',
-    'name' => 'Admin User',
- ]);
+  $mng = _dbMongoManager();
 
-} catch(Exception $ex){
-  _response(500, 'System under maintainance mongodb', __LINE__);
+  $listdatabases = new MongoDB\Driver\Command(["listDatabases" => 1]);
+  $res = $mng->executeCommand("admin", $listdatabases);
+
+  $databases = current($res->toArray());
+
+  foreach ($databases->databases as $el) {
+      echo $el->name . "\n";
+  }
+
+} catch (MongoDB\Driver\Exception\Exception $e) {
+
+  _response(500, 'System under maintainance: mongodb failes:' . $e->getMessage(), __LINE__);
 }
 
 try {

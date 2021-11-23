@@ -29,11 +29,12 @@ function _db(){
     return new PDO($database_connection, $database_user_name, $database_pasword, $database_options);
 }
 
-function _dbForum(){
-    $client = new MongoDB\Client('mongodb+srv://user1:finalproject@e-learning.b2jtf.mongodb.net/e-learning?retryWrites=true&w=majority');
-    $collection = $client->forum->discussion;
+// function _dbMongoManager(){
+//     $manager = new MongoDB\Driver\Manager('mongodb+srv://user1:finalproject@e-learning.b2jtf.mongodb.net/e-learning?retryWrites=true&w=majority');
+//     // $client = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+//     //$collection = $client->forum->discussion;
 
-    return $collection;
-}
+//     return $manager;
+// }
 
 
