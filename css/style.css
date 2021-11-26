@@ -18,6 +18,11 @@
     transform: scale(1.1);
 }
 
-#your-question {
+#your_question {
     display: none;
+}
+
+#overview_wrapper{
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) );;
 }

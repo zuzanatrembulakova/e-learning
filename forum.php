@@ -36,7 +36,7 @@
 
             
             
-            <div id="your-question">
+            <div id="your_question">
             <h2>What do you want to ask?</h2>
                 <form onsubmit="return false">
                     <label>Ask</label>

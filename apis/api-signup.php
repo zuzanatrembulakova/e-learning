@@ -62,7 +62,7 @@ try{
 
   $user = array('student_id' => $user_id, 'student_name' => $_POST['name'], 'student_surname' => $_POST['surname'], 'student_username' => $_POST['username'], 'student_email' => $_POST['email']);
   session_start();
-  $_SESSION['user'] = $user;
+  $_SESSION['student'] = $user;
 
   _response(200,'Success');
 

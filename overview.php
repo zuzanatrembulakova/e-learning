@@ -4,12 +4,23 @@ session_start();
 
 require_once(__DIR__.'/globals.php');
 
-try{
-    $db = _db();
+$db = _db();
 
+try{
+    $q = $db->prepare('SELECT * FROM topics WHERE topic_id IN (SELECT topic_id FROM topic_student WHERE student_id = :student_id)');
+    $q->bindValue(':student_id', $_SESSION['student']['student_id']);
+    $q->execute();
+    $activeTopics = $q->fetchAll();
+
+} catch(Exception $ex){
+    _response(500, 'System under maintainance', __LINE__);
+    exit();
+}
+
+try{
     $q = $db->prepare('SELECT * FROM topics');
     $q->execute();
-    $topics = $q->fetchAll();
+    $newTopics = $q->fetchAll();
 
 } catch(Exception $ex){
     _response(500, 'System under maintainance', __LINE__);
@@ -29,13 +40,26 @@ try{
 </head>
 <body>
 
-    <div>
+    <h1>You are logged in as <?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?></h1>
+    <div id="overview_wrapper">
         <div>
-            <h2>Topic</h2>
+            <h2>Active Topics</h2>
             <div>
-               <?php foreach($topics as $topic){ ?>
-                <p><?= $topic['topic_name'] ?></p>
+               <?php foreach($activeTopics as $activeTopic){ ?>
+                <p><?= $activeTopic['topic_name'] ?></p>
                 <?php } ?>
+            </div>
+            <div>
+                <h3>Start new topic</h3>
+                <form onsubmit="return false" id="form_topic">
+                    <select name="tag">
+                        <?php foreach($newTopics as $newTopic){ ?>
+                            <option value="<?= $newTopic['topic_id'] ?>"><?= $newTopic['topic_name'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <input type="hidden" name="student_id" value="<?= $_SESSION['student']['student_id']; ?>">
+                    <button onclick='chooseTopic()'>start</button>
+                </form>
             </div>
         </div>
 
@@ -52,6 +76,8 @@ try{
             <h2>Activities not started</h2>
         </div>
     </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>

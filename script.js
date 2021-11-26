@@ -7,7 +7,7 @@ async function signup(){
     let response = await connection.json()
     console.log(response)
     if( connection.ok ) { 
-        location.href = "student-login.php" 
+        location.href = "choose-topic.php" 
     } else {
         alert(response['info'])
     }
@@ -22,7 +22,7 @@ async function signin(){
     let res = await conn.json()
     console.log(res)
     if( conn.ok ){ 
-        location.href = "choose-topic.php" 
+        location.href = "overview.php" 
     } else {
         alert(res['info'])
     }
