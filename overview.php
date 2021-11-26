@@ -82,6 +82,7 @@ try{
 
                 <?php foreach($startedActivities as $startedActivity){ ?>
                     <form onsubmit="return false" id="form_started_activity">
+                        <input type="hidden" name="activity_id" value="<?= $startedActivity['activity_id'] ?>">
                         <a href="one-activity.php?id=<?= $startedActivity['activity_id'] ?>"><?= $startedActivity['activity_name'] ?></a>
                         <button onclick='finishActivity()'>Done</button>
                     </form>
