@@ -27,6 +27,19 @@ try{
     exit();
 }
 
+try{
+    $q = $db->prepare('SELECT * FROM activities WHERE activity_id IN 
+    (SELECT activity_id FROM topic_student_activity WHERE topic_student_id IN 
+    (SELECT topic_student_id FROM topic_student WHERE student_id = :student_id))');
+    $q->bindValue(':student_id', $_SESSION['student']['student_id']);
+    $q->execute();
+    $startedActivities = $q->fetchAll();
+
+} catch(Exception $ex){
+    _response(500, 'System under maintainance', __LINE__);
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -65,16 +78,22 @@ try{
 
         <div>
             <h2>Started activities</h2>
+            <div id="started_activities">
 
+                <?php foreach($startedActivities as $startedActivity){ ?>
+                    <form onsubmit="return false" id="form_started_activity">
+                        <a href="one-activity.php?id=<?= $startedActivity['activity_id'] ?>"><?= $startedActivity['activity_name'] ?></a>
+                        <button onclick='finishActivity()'>Done</button>
+                    </form>
+                <?php } ?>
+
+            </div>
         </div>
 
         <div>
             <h2>Finished activities</h2>
         </div>
 
-        <div>
-            <h2>Activities not started</h2>
-        </div>
     </div>
 
     <script src="script.js"></script>
