@@ -6,39 +6,61 @@ require_once(__DIR__.'/globals.php');
 
 $db = _db();
 
-try{
-    $q = $db->prepare('SELECT * FROM topics WHERE topic_id IN (SELECT topic_id FROM topic_student WHERE student_id = :student_id)');
+try {
+    $q = $db->prepare('SELECT topic_student_activity.activity_id, topics.topic_name, activities.activity_name, topics.topic_id, topic_student_activity.topic_student_id FROM topic_student_activity 
+    INNER JOIN topic_student ON topic_student_activity.topic_student_id = topic_student.topic_student_id 
+    INNER JOIN topics ON topic_student.topic_id = topics.topic_id 
+    INNER JOIN activities ON topic_student_activity.activity_id = activities.activity_id 
+    WHERE activity_end_date IS NULL AND topic_student.student_id = :student_id');
     $q->bindValue(':student_id', $_SESSION['student']['student_id']);
     $q->execute();
-    $activeTopics = $q->fetchAll();
+    $rows = $q->fetchAll();
+
 
 } catch(Exception $ex){
     _response(500, 'System under maintainance', __LINE__);
-    exit();
+    exit(); 
 }
 
-try{
-    $q = $db->prepare('SELECT * FROM topics');
-    $q->execute();
-    $newTopics = $q->fetchAll();
+// SELECT topic_student_activity.activity_id, topics.topic_name, activities.activity_name FROM topic_student_activity 
+// INNER JOIN topic_student ON topic_student_activity.topic_student_id = topic_student.topic_student_id 
+// INNER JOIN topics ON topic_student.topic_id = topics.topic_id 
+// INNER JOIN activities ON topic_student_activity.activity_id = activities.activity_id 
+// WHERE activity_end_date IS NULL AND topic_student.student_id = 8;
 
-} catch(Exception $ex){
-    _response(500, 'System under maintainance', __LINE__);
-    exit();
-}
+// try{
+//     $q = $db->prepare('SELECT * FROM topics WHERE topic_id IN (SELECT topic_id FROM topic_student WHERE student_id = :student_id)');
+//     $q->bindValue(':student_id', $_SESSION['student']['student_id']);
+//     $q->execute();
+//     $activeTopics = $q->fetchAll();
 
-try{
-    $q = $db->prepare('SELECT * FROM activities WHERE activity_id IN 
-    (SELECT activity_id FROM topic_student_activity WHERE topic_student_id IN 
-    (SELECT topic_student_id FROM topic_student WHERE student_id = :student_id))');
-    $q->bindValue(':student_id', $_SESSION['student']['student_id']);
-    $q->execute();
-    $startedActivities = $q->fetchAll();
+// } catch(Exception $ex){
+//     _response(500, 'System under maintainance', __LINE__);
+//     exit();
+// }
 
-} catch(Exception $ex){
-    _response(500, 'System under maintainance', __LINE__);
-    exit();
-}
+// try{
+//     $q = $db->prepare('SELECT * FROM topics');
+//     $q->execute();
+//     $newTopics = $q->fetchAll();
+
+// } catch(Exception $ex){
+//     _response(500, 'System under maintainance', __LINE__);
+//     exit();
+// }
+
+// try{
+//     $q = $db->prepare('SELECT * FROM activities WHERE activity_id IN 
+//     (SELECT activity_id FROM topic_student_activity WHERE topic_student_id IN 
+//     (SELECT topic_student_id FROM topic_student WHERE student_id = :student_id))');
+//     $q->bindValue(':student_id', $_SESSION['student']['student_id']);
+//     $q->execute();
+//     $startedActivities = $q->fetchAll();
+
+// } catch(Exception $ex){
+//     _response(500, 'System under maintainance', __LINE__);
+//     exit();
+// }
 
 ?>
 
@@ -58,16 +80,16 @@ try{
         <div>
             <h2>Active Topics</h2>
             <div>
-               <?php foreach($activeTopics as $activeTopic){ ?>
-                <p><?= $activeTopic['topic_name'] ?></p>
+               <?php foreach($rows as $row){ ?>
+                <p><?= $row['topic_name'] ?></p>
                 <?php } ?>
             </div>
             <div>
                 <h3>Start new topic</h3>
                 <form onsubmit="return false" id="form_topic">
                     <select name="tag">
-                        <?php foreach($newTopics as $newTopic){ ?>
-                            <option value="<?= $newTopic['topic_id'] ?>"><?= $newTopic['topic_name'] ?></option>
+                        <?php foreach($rows as $row){ ?>
+                            <option value="<?= $row['topic_id'] ?>"><?= $row['topic_name'] ?></option>
                         <?php } ?>
                     </select>
                     <input type="hidden" name="student_id" value="<?= $_SESSION['student']['student_id']; ?>">
@@ -80,10 +102,11 @@ try{
             <h2>Started activities</h2>
             <div id="started_activities">
 
-                <?php foreach($startedActivities as $startedActivity){ ?>
+                <?php foreach($rows as $row){ ?>
                     <form onsubmit="return false" id="form_started_activity">
-                        <input type="hidden" name="activity_id" value="<?= $startedActivity['activity_id'] ?>">
-                        <a href="one-activity.php?id=<?= $startedActivity['activity_id'] ?>"><?= $startedActivity['activity_name'] ?></a>
+                        <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
+                        <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
+                        <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
                         <button onclick='finishActivity()'>Done</button>
                     </form>
                 <?php } ?>

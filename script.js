@@ -45,18 +45,18 @@ async function chooseTopic(){
 
 async function finishActivity(){
     console.log('ahoj');
-    // const form = event.target.form
-    // let conn = await fetch("apis/api-choose-topic.php", {
-    //   method: "POST",
-    //   body: new FormData(form)
-    // })
-    // let res = await conn.json()
-    // console.log(res)
-    // if( conn.ok ){ 
-    //     location.href = "overview.php" 
-    // } else {
-    //     alert(res['info'])
-    // }
+    const form = event.target.form
+    let conn = await fetch("apis/api-finish-activity.php", {
+      method: "POST",
+      body: new FormData(form)
+    })
+    let res = await conn.json()
+    console.log(res)
+    if( conn.ok ){ 
+        location.href = "overview.php" 
+    } else {
+        alert(res['info'])
+    }
 }
 
 
