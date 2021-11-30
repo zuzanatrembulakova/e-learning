@@ -14,9 +14,10 @@ $options = ['_id' => 0];
 $query = new MongoDB\Driver\Query($filter, $options);
 $cursor = $mng->executeQuery('forum.discussion', $query);
 
-$data = json_encode(iterator_to_array($cursor));
+$data = iterator_to_array($cursor);
 
-var_dump($data);
+// var_dump($data);
+// echo $data[0]['_id'];
 
 try {
     $q = $db->prepare('SELECT topic_student_activity.activity_id, topics.topic_name, 
@@ -109,7 +110,11 @@ try{
             <h2>Active Topics</h2>
             <div>
                <?php foreach($activeTopics as $activeTopic){ ?>
-                <p><?= $activeTopic['topic_name'] ?></p>
+                    <form id="topic_form">
+                        <p><?= $activeTopic['topic_name'] ?></p>
+                        <input type="hidden" name="active_topic_id" value="<?= $activeTopic['topic_id'] ?>">
+                        <button onclick='removeTopic()'>Sign out of topic</button>
+                    </form>
                 <?php } ?>
             </div>
             <div>

@@ -43,6 +43,21 @@ async function chooseTopic(){
     }
 }
 
+async function removeTopic(){
+    const form = event.target.form
+    let conn = await fetch("apis/api-remove-topic.php", {
+      method: "POST",
+      body: new FormData(form)
+    })
+    let res = await conn.json()
+    console.log(res)
+    if( conn.ok ){ 
+        location.href = "overview.php" 
+    } else {
+        alert(res['info'])
+    }
+}
+
 async function finishActivity(){
     console.log('ahoj');
     const form = event.target.form
