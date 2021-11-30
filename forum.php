@@ -1,3 +1,36 @@
+<?php
+
+require_once(__DIR__.'/globals.php');
+
+// $mng = _dbMongoManager();
+// $listdatabases = new MongoDB\Driver\Command(["listCollections" => 1]);
+// $res = $mng->executeCommand("forum", $listdatabases);
+// $collections = current($res->toArray());
+// print_r($collections);
+
+// $posts = executeBulkRead($collections.find());
+// foreach ($posts as $post) {
+//         var_dump($post);
+//      };
+
+
+
+// $client = new MongoDB\Client("mongodb://localhost:27017");
+// echo "Connection to database successfully";
+
+// $mng = _dbMongoManager();
+// $forumdb = $mng->forum;
+// $discussioncollection = $forumdb->discussion;
+
+
+// $posts = $discussioncollection->find();
+//  foreach ($posts as $post) {
+//     var_dump($post);
+//  };
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +79,10 @@
                 </form>
             </div>
 
-            <button onclick="displayInput()" type="button" class="plus_button frog_position plusSign" id="frog_btn">
+            <!-- <button onclick="displayInput()" type="button" class="plus_button frog_position plusSign" id="frog_btn">
                     &#43;
-            </button>
+            </button> -->
+
 
             <script src="script.js"></script>
      

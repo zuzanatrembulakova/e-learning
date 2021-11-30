@@ -75,7 +75,7 @@ async function sendQuestion(){
 }
 
 
-function displayInput() {
-    document.querySelector("#your_question").style.display = "block"
-}
+// function displayInput() {
+//     document.querySelector("#your_question").style.display = "block"
+// }
 

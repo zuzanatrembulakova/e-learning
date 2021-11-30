@@ -1,4 +1,4 @@
-.plus_button {
+/* .plus_button {
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 2px 2px 2px black;
@@ -16,11 +16,11 @@
 .plus_button:hover {
     cursor: pointer;
     transform: scale(1.1);
-}
+} */
 
-#your_question {
+/* #your_question {
     display: none;
-}
+} */
 
 #overview_wrapper{
     display: grid;

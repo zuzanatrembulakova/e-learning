@@ -33,6 +33,9 @@ require_once(__DIR__.'/../globals.php');
     //     echo ('no data to store');
     // }
 
+
+
+
     $mng = _dbMongoManager();
   
     $bulk = new MongoDB\Driver\BulkWrite;
@@ -46,6 +49,19 @@ require_once(__DIR__.'/../globals.php');
     $bulk->insert($doc);
   
     $result = $mng->executeBulkWrite('forum.discussion', $bulk);
+
+    // $mng = _dbMongoManager();
+    // $forumdb = $mng->forum;
+    // $discussioncollection = $forumdb->discussion;
+
+    // $doc = array (
+    //               'user_name' => $_POST['name'],
+    //               'time' => $timestamp,
+    //               'question' => $_POST['question'],
+    //           );
+    
+    // $discussioncollection->insert($doc);
+
   
   } catch (MongoDB\Driver\Exception\Exception $e) {
   
