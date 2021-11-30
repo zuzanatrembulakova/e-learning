@@ -16,6 +16,11 @@ $cursor = $mng->executeQuery('forum.discussion', $query);
 
 $data = iterator_to_array($cursor);
 
+
+// foreach ($data as $value) {
+//     echo $value['email'];
+//  }
+
 // var_dump($data);
 // echo $data[0]['_id'];
 
@@ -37,7 +42,7 @@ try {
 }
 
 try {
-    $q = $db->prepare('SELECT activities.* FROM activities
+    $q = $db->prepare('SELECT activities.*, topic_student_activity.grade_id FROM activities
     INNER JOIN topic_student_activity ON topic_student_activity.activity_id = activities.activity_id
     INNER JOIN topic_student ON topic_student.topic_student_id = topic_student_activity.topic_student_id
     WHERE topic_student.student_id = :student_id AND topic_student_activity.activity_end_date IS NOT NULL');
@@ -52,7 +57,7 @@ try {
 }
 
 try {
-    $q = $db->prepare('SELECT grades.grade_name FROM grades
+    $q = $db->prepare('SELECT grades.grade_id, grades.grade_name FROM grades
     INNER JOIN topic_student_activity ON topic_student_activity.grade_id = grades.grade_id
     INNER JOIN topic_student ON topic_student_activity.topic_student_id = topic_student.topic_student_id
     WHERE topic_student.student_id = :student_id');
@@ -154,10 +159,18 @@ try{
                 <?php foreach($finishedActivities as $finishedActivity){ ?>
                     <form onsubmit="return false" id="form_started_activity">
                         <a href="#"><?= $finishedActivity['activity_name'] ?></a>
-                        <p><?php if($finishedActivity['activity_is_graded'] == 1){
-                            foreach($activtyGrades as $activtyGrade){
-                                echo $activtyGrade['grade_name'];
-                         }} else{ ?>Not graded <?php } ?></p>
+                        <p><?php 
+                        
+                        if($finishedActivity['activity_is_graded'] == 1){ 
+                            if($finishedActivity['grade_id']){
+                                foreach($activtyGrades as $activtyGrade){
+                                    echo $activtyGrade['grade_name'];
+                                }
+                            } else { ?>
+                                Grade is pending
+                           <?php }
+
+                        } else { ?> Not graded <?php } ?></p>
                     </form>
                 <?php } ?>
 
