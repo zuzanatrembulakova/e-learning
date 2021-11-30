@@ -8,7 +8,9 @@ $db = _db();
 
 $mng = _dbMongoManager();
 
-$filter = [];
+$filter = [
+    "tag" => "tag1"
+];
 $options = ['_id' => 0];
 
 $query = new MongoDB\Driver\Query($filter, $options);
@@ -16,13 +18,10 @@ $cursor = $mng->executeQuery('forum.discussion', $query);
 
 $data = iterator_to_array($cursor);
 
-
-// foreach ($data as $value) {
-//     echo $value['email'];
-//  }
-
-// var_dump($data);
-// echo $data[0]['_id'];
+foreach ($data as $value) {
+    $document = json_decode(json_encode($value), true);
+    echo $document['email'];
+ }
 
 try {
     $q = $db->prepare('SELECT topic_student_activity.activity_id, topics.topic_name, 
