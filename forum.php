@@ -40,8 +40,9 @@
             <h2>What do you want to ask?</h2>
                 <form onsubmit="return false">
                     <label>Ask</label>
+                    <input type="hidden" name="name" value="Sara Bertova"></input>
                     <textarea name="question" placeholder="Enter your question"></textarea>
-                    <button onclick="()">Send question</button>
+                    <button onclick="sendQuestion()">Send question</button>
                 </form>
             </div>
 
