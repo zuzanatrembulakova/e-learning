@@ -2,31 +2,6 @@
 require_once(__DIR__.'/../globals.php');
 
 try {
-
-  $mng = _dbMongoManager();
-
-  // $bulk = new MongoDB\Driver\BulkWrite;
-
-  // $doc = [
-
-  // 'clientName' => 'Raizel',
-
-  // 'email' => 'raizel@whatever.com',
-
-  // 'tag' => 'Admin User',
-
-  // ];
-
-  // $bulk->insert($doc);
-
-  // $result = $mng->executeBulkWrite('forum.discussion', $bulk);
-
-} catch (MongoDB\Driver\Exception\Exception $e) {
-
-  _response(500, 'System under maintainance: mongodb failes:' . $e->getMessage(), __LINE__);
-}
-
-try {
     $db = _db();
 } catch(Exception $ex){
     _response(500, 'System under maintainance', __LINE__);
