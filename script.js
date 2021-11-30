@@ -59,7 +59,20 @@ async function finishActivity(){
     }
 }
 
-
+async function sendQuestion(){
+    const form = event.target.form
+    let conn = await fetch("apis/api-send-question.php", {
+      method: "POST",
+      body: new FormData(form)
+    })
+    let res = await conn.json()
+    console.log(res)
+    if( conn.ok ){ 
+        location.href = "forum.php" 
+    } else {
+        alert(res['info'])
+    }
+}
 
 
 function displayInput() {
