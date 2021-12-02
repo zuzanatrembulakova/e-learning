@@ -35,11 +35,15 @@ try {
 }
 
 try {
-    $q2 = $db->prepare('SELECT topics.topic_id, topics.topic_name FROM topics
-    INNER JOIN teachers ON topics.teacher_id = teachers.teacher_id 
-    WHERE topics.teacher_id = :teacher_id');
+    $q2 = $db->prepare('CALL sp_getTopics(:teacher_id)');
     $q2->bindValue(':teacher_id', $teacherid);
     $q2->execute();
+    
+    // $q2 = $db->prepare('SELECT topics.topic_id, topics.topic_name FROM topics
+    // INNER JOIN teachers ON topics.teacher_id = teachers.teacher_id 
+    // WHERE topics.teacher_id = :teacher_id');
+    // $q2->bindValue(':teacher_id', $teacherid);
+    // $q2->execute();
 
 } catch(Exception $ex){
     _response(500, 'System under maintainance', __LINE__);
