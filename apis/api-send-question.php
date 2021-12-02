@@ -41,8 +41,9 @@ require_once(__DIR__.'/../globals.php');
     $bulk = new MongoDB\Driver\BulkWrite;
 
     $doc = array (
+                'topic_id' => $_POST['topicid'],
                 'user_name' => $_POST['name'],
-                'time' => $timestamp,
+                'datetime' => $timestamp,
                 'question' => $_POST['question'],
             );
   
