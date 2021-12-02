@@ -22,7 +22,7 @@ try {
     }
 
 try {
-        $q2 = $db->prepare('SELECT students.student_name, students.student_surname, activities.activity_name, topic_student_activity.activity_end_date FROM topic_student_activity
+        $q2 = $db->prepare('SELECT students.student_name, students.student_surname, activities.activity_name, activities.activity_is_graded, activities.activity_id, topic_student_activity.activity_end_date FROM topic_student_activity
         INNER JOIN activities ON topic_student_activity.activity_id = activities.activity_id
         INNER JOIN topic_student ON activities.topic_id = topic_student.topic_id 
         INNER JOIN students ON topic_student.student_id = students.student_id 
@@ -36,6 +36,25 @@ try {
         _response(500, 'System under maintainance', __LINE__);
         exit(); 
     }
+
+try {
+    $q3 = $db->prepare('SELECT grades.grade_name, grades.grade_id FROM topic_student_activity
+    INNER JOIN activities ON topic_student_activity.activity_id = activities.activity_id
+    INNER JOIN topic_student ON activities.topic_id = topic_student.topic_id
+    INNER JOIN grades ON topic_student_activity.grade_id = grades.grade_id
+    INNER JOIN students ON topic_student.student_id = students.student_id
+    INNER JOIN topics ON topic_student.topic_id = topics.topic_id
+    WHERE topic_student.topic_id = :topic_id AND students.student_id = :student_id');
+    $q3->bindValue(':topic_id', $topicid);
+    $q3->bindValue(':student_id', $studentid);
+    $q3->execute();
+    $grade = $q3->fetch();
+
+
+} catch(Exception $ex){
+    _response(500, 'System under maintainance', __LINE__);
+    exit(); 
+}
 
 ?> 
 
@@ -56,10 +75,28 @@ try {
         <div>
         <?php
         while($activity = $q2->fetch()){
+            if ($activity['activity_is_graded'] == "1"){
         ?>
-            <a href=""><?= $activity['activity_name'] ?></a>
+        <div>
+            <a href="grade-activity.php?activityID=<?= $activity['activity_id'] ?>&studentID=<?= $studentid ?>"><?= $activity['activity_name'] ?></a>
+            <?php 
+            if ($grade['grade_id']) {
+            ?>
+                <p><?= $grade['grade_name'] ?></p>
+            <?php 
+            } else{
+            ?>
+            <p>Graded</p>
+            <?php 
+            } 
+            ?>
+        </div>
+        <?php        
+            } else{
+        ?>
+            <p><?= $activity['activity_name'] ?> - Not Graded</p>
         <?php
-        }
+        }}
         ?>
         </div>
     </div>

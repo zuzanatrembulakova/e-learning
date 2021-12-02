@@ -59,7 +59,6 @@ async function removeTopic(){
 }
 
 async function finishActivity(){
-    console.log('ahoj');
     const form = event.target.form
     let conn = await fetch("apis/api-finish-activity.php", {
       method: "POST",
@@ -85,6 +84,21 @@ async function sendQuestion(){
     console.log(res)
     if( conn.ok ){ 
         location.href = "discussion.php?id=" + topicid
+    } else {
+        alert(res['info'])
+    }
+}
+
+async function gradeActivity(){
+    const form = event.target.form
+    let conn = await fetch("apis/api-grade-activity.php", {
+      method: "POST",
+      body: new FormData(form)
+    })
+    let res = await conn.json()
+    console.log(res)
+    if( conn.ok ){ 
+        location.href = "overview.php" 
     } else {
         alert(res['info'])
     }
