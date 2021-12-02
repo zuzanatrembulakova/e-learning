@@ -6,22 +6,22 @@ require_once(__DIR__.'/globals.php');
 
 $db = _db();
 
-$mng = _dbMongoManager();
+// $mng = _dbMongoManager();
 
-$filter = [
-    "tag" => "tag1"
-];
-$options = ['_id' => 0];
+// $filter = [
+//     "tag" => "tag1"
+// ];
+// $options = [];
 
-$query = new MongoDB\Driver\Query($filter, $options);
-$cursor = $mng->executeQuery('forum.discussion', $query);
+// $query = new MongoDB\Driver\Query($filter, $options);
+// $cursor = $mng->executeQuery('forum.discussion', $query);
 
-$data = iterator_to_array($cursor);
+// $data = iterator_to_array($cursor);
 
-foreach ($data as $value) {
-    $document = json_decode(json_encode($value), true);
-    echo $document['email'];
- }
+// foreach ($data as $value) {
+//     $document = json_decode(json_encode($value), true);
+//     echo $document['email'];
+// }
 
 try {
     $q = $db->prepare('SELECT topic_student_activity.activity_id, topics.topic_name, 
@@ -95,6 +95,16 @@ try{
     exit();
 }
 
+try{
+    $q = $db->prepare('SELECT * FROM topics');
+    $q->execute();
+    $allTopics = $q->fetchAll();
+
+} catch(Exception $ex){
+    _response(500, 'System under maintainance', __LINE__);
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -107,6 +117,15 @@ try{
     <title>Choose topic</title>
 </head>
 <body>
+
+    <nav>
+        <h2>Discussion</h2>
+        <div>
+            <?php foreach($allTopics as $topic){ ?>
+                <a href="discussion.php?id=<?= $topic['topic_id'] ?>"><?= $topic['topic_name'] ?></a>
+            <?php } ?>
+        </div>
+    </nav>
 
     <h1>You are logged in as <?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?></h1>
     <div id="overview_wrapper">
