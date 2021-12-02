@@ -6,23 +6,6 @@ require_once(__DIR__.'/globals.php');
 
 $db = _db();
 
-// $mng = _dbMongoManager();
-
-// $filter = [
-//     "tag" => "tag1"
-// ];
-// $options = [];
-
-// $query = new MongoDB\Driver\Query($filter, $options);
-// $cursor = $mng->executeQuery('forum.discussion', $query);
-
-// $data = iterator_to_array($cursor);
-
-// foreach ($data as $value) {
-//     $document = json_decode(json_encode($value), true);
-//     echo $document['email'];
-// }
-
 try {
     $q = $db->prepare('SELECT topic_student_activity.activity_id, topics.topic_name, 
     activities.activity_name, topics.topic_id, topic_student_activity.topic_student_id FROM topic_student_activity 
@@ -127,7 +110,11 @@ try{
         </div>
     </nav>
 
-    <h1>You are logged in as <?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?></h1>
+    <div id="user">
+        <h1>You are logged in as <?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?></h1>
+        <a href="bridge-signout.php">Sign out</a>
+    </div>
+
     <div id="overview_wrapper">
         <div>
             <h2>Active Topics</h2>
