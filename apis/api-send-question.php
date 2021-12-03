@@ -51,12 +51,7 @@ require_once(__DIR__.'/../globals.php');
   
     $result = $mng->executeBulkWrite('forum.discussion', $bulk);
 
-    $data = iterator_to_array($result);
-        
-    foreach ($data as $value) {
-        $document = json_decode(json_encode($value), true); 
-        echo $document;
-    }
+    _response(200, 'Success', __LINE__);
 
     // $mng = _dbMongoManager();
     // $forumdb = $mng->forum;
