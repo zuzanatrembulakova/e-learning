@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Create account</title>
 </head>
 
-<div id="sign-up">
+<div id="sign_up">
     <h1>Create account</h1>
     <form id="form_sign_up" onsubmit="return false">
         <label>First name</label>

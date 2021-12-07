@@ -163,7 +163,7 @@ try{
 
                 <?php foreach($finishedActivities as $finishedActivity){ ?>
                     <form onsubmit="return false" id="form_started_activity">
-                        <a href="#"><?= $finishedActivity['activity_name'] ?></a>
+                        <a href="one-activity.php?id=<?= $finishedActivity['activity_id'] ?>"><?= $finishedActivity['activity_name'] ?></a>
                         <p><?php 
                         
                         if($finishedActivity['activity_is_graded'] == 1){ 

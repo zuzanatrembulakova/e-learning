@@ -68,7 +68,7 @@ try {
 
     
     <h1>These are the finished activities for <?= $row['student_name'] ?> <?= $row['student_surname'] ?></h1>
-    <div id="overview_wrapper">
+    <div id="list_wrapper">
         <div>
         <?php
         while($activity = $q2->fetch()){
@@ -79,9 +79,9 @@ try {
             <?php 
             
             if (isset($grade['grade_id'])) { ?>
-                <p><?= $grade['grade_name'] ?></p>
+                <p> - <?= $grade['grade_name'] ?></p>
             <?php } else{?>
-                <p>Graded</p>
+                <p> - Graded</p>
             <?php 
             } 
             ?>

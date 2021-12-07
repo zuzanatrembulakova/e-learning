@@ -79,7 +79,7 @@ try {
 
     
     <h1>You are logged in as <?= $row['teacher_name'] ?> <?= $row['teacher_surname'] ?></h1>
-    <div id="overview_wrapper">
+    <div id="list_wrapper">
         <div>
         <?php
         while($topic = $q2->fetch()){
@@ -91,45 +91,7 @@ try {
         </div>
     </div>
 
-    <!-- <div id="overview_wrapper">
-        <div>
-        <?php
-        while($topic = $q2->fetch()){
-        ?>
-            <div><?= $topic['topic_name'] ?></div>
-            <?php
-        while($student = $q3->fetch()){
-        ?>
-            <a href=""><?= $student['student_name'] ?> <?= $student['student_surname'] ?></a>
-        <?php
-        }}
-        ?>
-        </div>
-    </div> -->
-
-
-        <!-- <?php   
-        foreach($rows as $row){
-        ?>
-    <h1>You are logged in as <?= $row['teacher_name'] ?> <?= $row['teacher_surname'] ?></h1>
-    <?php
-        }
-        ?>
-    <div id="overview_wrapper">
-        <div>
-        <?php
-        foreach($rows as $row){
-        ?>
-            <p><?= $row['topic_name'] ?></p>
-        <?php
-        }
-        ?>
-        </div>
-        
-
-    </div> -->
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
