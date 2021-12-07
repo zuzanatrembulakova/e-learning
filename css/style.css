@@ -153,7 +153,7 @@ nav a:hover{
     margin-bottom: .2rem;
 }
 
-#student_wrapper, #activities_wrapper, #topics_wrapper > div {
+#student_wrapper, #activities_wrapper {
     display: flex;
     flex-direction: column;
 }
@@ -162,7 +162,7 @@ nav a:hover{
     margin: 0;
 }
 
-#activities_wrapper > div > a, #activities_wrapper p, #topics_wrapper > div > a, #student_wrapper > div > a {
+#activities_wrapper > div > a, #activities_wrapper p {
     margin-bottom: 1rem;
 }
 
@@ -173,6 +173,23 @@ nav a:hover{
 
 #activities_wrapper > div > a, #student_wrapper > div > a {
     margin-right: .5rem;
+}
+
+table {
+    /* border-collapse: collapse; */
+    margin-left: 1rem;
+    width: max-content;
+    border: 2px solid #333333;
+}
+
+td, th {
+    padding: 1rem;
+    border: 1px solid #333333;
+    text-align: left;
+}
+
+#student_wrapper > div{
+    margin: .5rem 0;
 }
 
 
