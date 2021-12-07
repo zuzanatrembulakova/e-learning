@@ -30,10 +30,7 @@ function _db(){
 }
 
 function _dbMongoManager(){
-    // $manager = new MongoDB\Driver\Manager('mongodb+srv://user2:finalproject@e-learning.b2jtf.mongodb.net/e-learning?retryWrites=true&w=majority');
     $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-    //$collection = $client->forum->discussion;
-
     return $manager;
 }
 

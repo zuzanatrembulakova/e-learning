@@ -3,6 +3,55 @@ body{
     color: var(--black);
 }
 
+main{
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+    padding: 0 2rem;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+#teacher_list{
+    width: 90%;
+    margin: auto;
+    border-right: 2px solid grey;
+    padding-right: 2rem;
+}
+
+#teacher_list > div{
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(310px, 1fr) );
+    column-gap: 2rem;
+}
+
+#teacher_list > div > div{
+    margin: 1rem 0;
+    width: 300px;
+    padding: 1.5rem;
+    border-bottom: 2px solid #333333;
+    background-color: #F2F5FA;
+}
+
+#teacher_list > div > div a{
+    color: #333333;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+}
+
+#teacher_list > div > div > div {
+    margin-top: 1rem;
+}
+
+#teacher_list > div > div > div p{ 
+    margin: .3rem 0 0 0;
+}
+
+#teacher_list > div > div a:hover{
+    color: #04D89D;
+}
+
 nav{
     width: 98%;
     margin: auto;
@@ -64,7 +113,7 @@ nav a:hover{
     grid-template-columns: 1fr;
 }
 
-#sign_up, #sign_in {
+#sign_up, main{
     margin-top: 5rem;
 }
 
@@ -75,8 +124,17 @@ nav a:hover{
 #sign_up > #form_sign_up, #sign_in > #form_sign_in {
     display: flex;
     flex-direction: column;
-    width: 350px;
     margin: 2rem auto 0 auto;
+    
+}
+
+#sign_up > #form_sign_up{
+    width: 350px;
+}
+
+#form_sign_in div{
+    display: flex;
+    justify-content: space-between;
 }
 
 #form_sign_up input, #form_sign_in input {
@@ -88,6 +146,7 @@ nav a:hover{
     height: 30px;
     width: fit-content;
     margin-left: auto;
+    cursor: pointer;
 }
 
 #form_sign_up label, #form_sign_in label {
