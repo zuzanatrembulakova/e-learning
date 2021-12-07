@@ -48,10 +48,10 @@ try {
 
     
     <h1>This is the student list for <?= $row['topic_name'] ?></h1>
-    <div id="list_wrapper">
-        <div>
+    <div id="student_wrapper">
         <?php
             foreach($students as $student){?>
+            <div>
                 <a href="student-finished-activities.php?studentid=<?= $student['student_id'] ?>&topicid=<?= $topicid ?>"><?= $student['student_name'] ?> <?= $student['student_surname'] ?></a>
                 <?php 
                 
@@ -69,10 +69,10 @@ try {
                     }
                 
                     while($topicCount = $q->fetch()){ ?>
-                    <p><?= $topicCount['count(*)'] ?></p>
+                    <p>(Number of active topics: <?= $topicCount['count(*)'] ?>)</p>
+                    </div>
                 <?php
         }} ?>
-        </div>
     </div>
 
 

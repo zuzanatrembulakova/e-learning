@@ -94,24 +94,26 @@ nav a:hover{
     margin-bottom: .2rem;
 }
 
-#list_wrapper > div {
+#student_wrapper, #activities_wrapper, #topics_wrapper > div {
     display: flex;
     flex-direction: column;
 }
 
-#list_wrapper p {
+#activities_wrapper p, #student_wrapper p {
     margin: 0;
 }
 
-#list_wrapper > div > a, #list_wrapper p {
+#activities_wrapper > div > a, #activities_wrapper p, #topics_wrapper > div > a, #student_wrapper > div > a {
     margin-bottom: 1rem;
 }
 
-#list_wrapper > div > div {
+#activities_wrapper > div, #student_wrapper > div{
     display: flex;
+    flex-direction: row;
 }
 
-#list_wrapper > div > div > a {
+#activities_wrapper > div > a, #student_wrapper > div > a {
     margin-right: .5rem;
 }
+
 

@@ -79,7 +79,7 @@ try {
 
     
     <h1>You are logged in as <?= $row['teacher_name'] ?> <?= $row['teacher_surname'] ?></h1>
-    <div id="list_wrapper">
+    <div id="topics_wrapper">
         <div>
         <?php
         while($topic = $q2->fetch()){
