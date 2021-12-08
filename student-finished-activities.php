@@ -9,34 +9,34 @@ $db = _db();
 
 
 try {
-        $q = $db->prepare('SELECT students.student_name, students.student_surname FROM students WHERE students.student_id = :student_id');
-        $q->bindValue(':student_id', $studentid);
-        $q->execute();
-        $row = $q->fetch();
-        // $students = $q->fetchAll();
-    
-    
-    } catch(Exception $ex){
-        _response(500, 'System under maintainance', __LINE__);
-        exit(); 
-    }
+    $q = $db->prepare('SELECT students.student_name, students.student_surname FROM students WHERE students.student_id = :student_id');
+    $q->bindValue(':student_id', $studentid);
+    $q->execute();
+    $row = $q->fetch();
+    // $students = $q->fetchAll();
+
+
+} catch(Exception $ex){
+    _response(500, 'System under maintainance', __LINE__);
+    exit(); 
+}
 
 try {
-        $q2 = $db->prepare('SELECT students.student_name, students.student_surname, activities.activity_name, 
-        activities.activity_is_graded, activities.activity_id, topic_student_activity.activity_end_date FROM topic_student_activity
-        INNER JOIN activities ON topic_student_activity.activity_id = activities.activity_id
-        INNER JOIN topic_student ON activities.topic_id = topic_student.topic_id AND topic_student_activity.topic_student_id = topic_student.topic_student_id
-        INNER JOIN students ON topic_student.student_id = students.student_id 
-        WHERE topic_student_activity.activity_end_date IS NOT NULL AND topic_student.topic_id = :topic_id AND topic_student.student_id = :student_id');
-        $q2->bindValue(':topic_id', $topicid);
-        $q2->bindValue(':student_id', $studentid);
-        $q2->execute();
-    
-    
-    } catch(Exception $ex){
-        _response(500, 'System under maintainance', __LINE__);
-        exit(); 
-    }
+    $q2 = $db->prepare('SELECT students.student_name, students.student_surname, activities.activity_name, 
+    activities.activity_is_graded, activities.activity_id, topic_student_activity.activity_end_date FROM topic_student_activity
+    INNER JOIN activities ON topic_student_activity.activity_id = activities.activity_id
+    INNER JOIN topic_student ON activities.topic_id = topic_student.topic_id AND topic_student_activity.topic_student_id = topic_student.topic_student_id
+    INNER JOIN students ON topic_student.student_id = students.student_id 
+    WHERE topic_student_activity.activity_end_date IS NOT NULL AND topic_student.topic_id = :topic_id AND topic_student.student_id = :student_id');
+    $q2->bindValue(':topic_id', $topicid);
+    $q2->bindValue(':student_id', $studentid);
+    $q2->execute();
+
+
+} catch(Exception $ex){
+    _response(500, 'System under maintainance', __LINE__);
+    exit(); 
+}
 
 try {
     $q = $db->prepare('SELECT grades.grade_id, grades.grade_name FROM grades

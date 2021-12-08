@@ -47,6 +47,13 @@ try {
       $q->bindValue(":topic_student_id", $_POST['topic_student_id']);
       $q->bindValue(":activity_id", $activity['next_activity_id']);
       $q->execute();
+    } else {
+      $q = $db->prepare('UPDATE topic_student SET topic_end_date = :topic_end_date 
+                       WHERE topic_id = :topic_id AND topic_student_id = :topic_student_id');
+      $q->bindValue(':topic_id', $_POST['topic_id']);
+      $q->bindValue(':topic_student_id', $_POST['topic_student_id']);
+      $q->bindValue(':topic_end_date', $timestamp);
+      $q->execute();
     }
     
     $db->commit();

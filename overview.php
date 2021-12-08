@@ -56,7 +56,7 @@ try {
 try{
     $q = $db->prepare('SELECT topics.topic_name, topics.topic_id FROM topics 
     INNER JOIN topic_student ON topics.topic_id = topic_student.topic_id 
-    WHERE topic_student.topic_end_date IS NULL AND topic_student.student_id = :student_id');
+    WHERE topic_student.student_id = :student_id');
     $q->bindValue(':student_id', $_SESSION['student']['student_id']);
     $q->execute();
     $activeTopics = $q->fetchAll();
@@ -149,6 +149,7 @@ try{
                     <form onsubmit="return false" id="form_started_activity">
                         <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
                         <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
+                        <input type="hidden" name="topic_id" value="<?= $row['topic_id'] ?>">
                         <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
                         <button onclick='finishActivity()'>Done</button>
                     </form>
