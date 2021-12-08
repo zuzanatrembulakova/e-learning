@@ -2,11 +2,25 @@
 
 require_once(__DIR__.'/globals.php');
 
-session_start();
+$db = _db();
 
 $topicid = $_GET['id'];
 
-$db = _db();
+if(isset($_GET['teacherID'])){
+    $teacherid = $_GET['teacherID'];
+
+    try{
+
+        $q2 = $db->prepare('SELECT * FROM teachers WHERE teacher_id = :teacher_id');
+        $q2->bindValue(":teacher_id", $teacherid);
+        $q2->execute();
+    
+    } catch (PDOexception $ex){
+        exit();
+    }
+} else {
+    session_start();
+}
 
 try{
 
@@ -30,57 +44,56 @@ try{
     <title>Discussion</title>
 </head>
 <body>
-    <?php
-        while($topic = $q->fetch()){
-    ?>
-    <h1>Discussion on <?= $topic['topic_name'] ?></h1>
-    <?php
-    }
-    ?>
-    <?php
-        $mng = _dbMongoManager();
 
-        $filter = [
-            "topic_id" => $topicid
-        ];
-        $options = [];
-        
-        $query = new MongoDB\Driver\Query($filter, $options);
-        $cursor = $mng->executeQuery('forum.discussion', $query);
-        
-        $data = iterator_to_array($cursor);
-        
-        foreach ($data as $value) {
-            $document = json_decode(json_encode($value), true);
-    ?>
+    <?php
+        while($topic = $q->fetch()){ ?>
+        <h1>Discussion on <?= $topic['topic_name'] ?></h1>
+    <?php } 
 
+    $mng = _dbMongoManager();
+
+    $filter = [
+        "topic_id" => $topicid
+    ];
+
+    $options = [];
+    
+    $query = new MongoDB\Driver\Query($filter, $options);
+    $cursor = $mng->executeQuery('forum.discussion', $query);
+    
+    $data = iterator_to_array($cursor);
+    
+    foreach ($data as $value) {
+        $document = json_decode(json_encode($value), true);
+    ?>
         <div class="post">
             <h3><?= $document['user_name'] ?></h3>
             <p><?= $document['datetime'] ?></p>
             <p><?= $document['question'] ?></p>
         </div>
 
-    <?php
-     }
-     ?>
+    <?php } ?>
 
 
-            <div id="your_question">
-            <h3>What do you want to ask?</h3>
-                <form onsubmit="return false">
-                    <label>Ask</label>
-                    <input type="hidden" name="name" value="<?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?>"></input>
-                    <input type="hidden" name="topicid" value=<?= $topicid ?>></input>
-                    <textarea name="question" placeholder="Enter your question"></textarea>
-                    <button onclick="sendQuestion()">Send question</button>
-                </form>
-            </div>
+    <div id="your_question">
+    <h3>What do you want to ask?</h3>
+        <form onsubmit="return false">
+            <label>Ask</label>
+            <?php if(isset($_SESSION)){ ?>
+                <input type="hidden" name="name" value="<?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?>">
+            <?php } else if(isset($teacherid)){
+                while($teacher = $q2->fetch()){ ?>
+                    <input type="hidden" name="name" value="<?= $teacher['teacher_name'] ?> <?= $teacher['teacher_surname'] ?>">
+                    <input type="hidden" name="teacherid" value="<?= $teacherid ?>">
+            <?php }
+            } ?>
+            <input type="hidden" name="topicid" value="<?= $topicid ?>">
+            <textarea name="question" placeholder="Enter your question"></textarea>
+            <button onclick="sendQuestion()">Send question</button>
+        </form>
+    </div>
 
-            
-
-
-            <script src="script.js"></script>
-     
+    <script src="script.js"></script> 
 
 </body>
 </html>

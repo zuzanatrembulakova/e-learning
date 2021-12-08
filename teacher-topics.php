@@ -59,7 +59,7 @@ try{
         <h2>Discussion</h2>
         <div>
             <?php foreach($allTopics as $topic){ ?>
-                <a href="discussion.php?id=<?= $topic['topic_id'] ?>"><?= $topic['topic_name'] ?></a>
+                <a href="discussion.php?id=<?= $topic['topic_id'] ?>&teacherID=<?= $teacherid ?>"><?= $topic['topic_name'] ?></a>
             <?php } ?>
         </div>
     </nav>

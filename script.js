@@ -76,14 +76,20 @@ async function finishActivity(){
 async function sendQuestion(){
     const post = new FormData(event.target.form)
     let topicid = post.get('topicid')
+
     let conn = await fetch("apis/api-send-question.php", {
       method: "POST",
       body: post
     })
+    
     let res = await conn.json()
     console.log(res)
     if( conn.ok ){ 
-        location.href = "discussion.php?id=" + topicid
+        if(post.get('teacherid')){
+            location.href = "discussion.php?id=" + topicid + "&teacherID=" + post.get('teacherid')
+        } else {
+            location.href = "discussion.php?id=" + topicid
+        }
     } else {
         alert(res['info'])
     }
