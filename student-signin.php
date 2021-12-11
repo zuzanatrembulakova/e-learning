@@ -34,7 +34,7 @@ try {
             <div>
                 <?php foreach($teachers as $teacher){ ?>
                     <div>
-                    <a href="teacher-topics.php?id=<?= $teacher['teacher_id'] ?>"><?= $teacher['teacher_name'] ?> <?= $teacher['teacher_surname'] ?></a>
+                    <a href="teacher-overview.php?id=<?= $teacher['teacher_id'] ?>"><?= $teacher['teacher_name'] ?> <?= $teacher['teacher_surname'] ?></a>
                 <?php 
                     try {
                         $q = $db->prepare('CALL sp_getTopics(:teacher_id)');

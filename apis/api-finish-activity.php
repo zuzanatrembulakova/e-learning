@@ -10,21 +10,6 @@ try {
 
  try {
 
-    // if(!isset($activity['next_activity_id'])){
-    //     $db->beginTransaction();
-
-    //     $q = $db->prepare('UPDATE topic_student_activity SET activity_end_date = :activity_end_date, grade_id = :grade_id 
-    //     WHERE activity_id = :activity_id');
-    //     $q->bindValue(':activity_end_date', $timestamp);
-    //     $q->bindValue(':grade_id', 1);
-    //     $q->execute();
-
-    //     $q = $db->prepare(' ');
-
-    //     $db->commit();
-    // }
-
-
     $db->beginTransaction();
 
     $timestamp = date('Y-m-d H:i:s');

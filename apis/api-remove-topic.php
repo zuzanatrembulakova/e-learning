@@ -32,7 +32,7 @@ try {
 
     _response(200, 'Success', __LINE__);
     
-  } catch(Exception $ex){
-    $db->rollBack();
-    _response(500, 'System under maintainance', __LINE__);
-  }
+} catch(Exception $ex){
+  $db->rollBack();
+  _response(500, 'System under maintainance', __LINE__);
+}
