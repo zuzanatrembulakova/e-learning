@@ -60,7 +60,7 @@ try {
             <h1>Or continue as a student</h1>
             <form onsubmit="return false" id="form_sign_in">
                 <label>Username or email</label>
-                <input type="text" name="username_email" type="text">
+                <input type="text" name="username_email">
                 <label>Password</label>
                 <input name="password" type="password">
                 <div>

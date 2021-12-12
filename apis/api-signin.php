@@ -1,6 +1,11 @@
 <?php
 require_once(__DIR__.'/../globals.php');
 
+// Validate the password
+if( ! isset($_POST['password']) ){ _response(400,'Password required'); }
+if(strlen($_POST['password']) < _PASSWORD_MIN_LEN){ _response(400,'Password min '._PASSWORD_MIN_LEN.' characters'); }
+if(strlen($_POST['password']) > _PASSWORD_MAX_LEN){ _response(400,'Password max '._PASSWORD_MAX_LEN.' characters'); }
+
 try{
     $db = _db();
   }catch(Exception $ex){
