@@ -56,16 +56,6 @@ try{
 <body>
 
 <main id="discussion_main">
-
-    <nav>
-        <h2>Discussion menu</h2>
-        <div>
-            <?php foreach($allTopics as $oneTopic){ ?>
-                <a href="discussion.php?id=<?= $oneTopic['topic_id'] ?>&teacherID=<?= $teacherid ?>"><?= $oneTopic['topic_name'] ?></a>
-            <?php } ?>
-        </div>
-    </nav>
-
     <div>
         <?php
             while($topic = $q->fetch()){ ?>
