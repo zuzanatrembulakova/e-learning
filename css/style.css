@@ -1,9 +1,30 @@
+*{
+    margin: 0;
+}
+
 body{
     font-family: Arial, sans-serif;
     color: var(--black);
 }
 
-main{
+button{
+    cursor: pointer;
+}
+
+.overview_main, #discussion_main{
+    display: flex;
+}
+
+#overview_student a, #overview_teacher a{
+    text-decoration: underline;
+    color: #333333;
+}
+
+#overview_student a:hover, #overview_teacher a:hover{
+    color: #04D89D;
+}
+
+#signin_main{
     display: grid;
     grid-template-columns: 1fr .5fr;
     padding: 0 2rem;
@@ -53,17 +74,20 @@ main{
 }
 
 nav{
-    width: 98%;
-    margin: auto;
-    border-bottom: 2px solid #333333;
-    padding: .5rem;
+    width: max-content;
+    height: 100vh;
+    border-right: 2px solid #333333;
+    padding-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 2rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 nav div{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -71,14 +95,15 @@ nav a{
     width: max-content;
     color: #333333;
     text-decoration: none;
-    margin-left: 1rem;
+    padding: .8rem 0;
 }
 nav a:hover{
     color: #04D89D;
 }
 
 #user{
-    width: 98%;
+    width: 100%;
+    border-bottom: 2px solid #333333;
     margin: auto;
     display: flex;
     align-items: center;
@@ -86,7 +111,7 @@ nav a:hover{
 
 #user h1{
     width: 98%;
-    margin: 1rem auto;
+    margin: 1rem 0 1rem 1rem;
 }
 
 #user a{
@@ -95,17 +120,36 @@ nav a:hover{
     color: #04D89D;
     text-transform: uppercase;
     font-weight: bold;
-
+    margin-right: 1rem;
 }
 #user a:hover{
     color: #333333;
 }
 
-#overview_wrapper{
+.overview_wrapper{
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 100%;
+    justify-content: center;
+}
+
+#overview_student{
+    margin: 0 auto 0 2rem;
     display: grid;
     width: 98%;
-    margin: 1rem auto;
     grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) );;
+}
+
+#overview_student > div{
+    margin-top: 2rem;
+}
+
+#topic_form, #form_started_activity{
+    margin: .8rem 0;
+}
+
+#new_topic{
+    margin-top: 3rem;
 }
 
 #started_activities{
@@ -113,7 +157,7 @@ nav a:hover{
     grid-template-columns: 1fr;
 }
 
-#sign_up, main{
+#sign_up, #signin_main{
     margin-top: 5rem;
 }
 
@@ -124,8 +168,7 @@ nav a:hover{
 #sign_up > #form_sign_up, #sign_in > #form_sign_in {
     display: flex;
     flex-direction: column;
-    margin: 2rem auto 0 auto;
-    
+    margin: 2rem auto 0 auto;  
 }
 
 #sign_up > #form_sign_up{
@@ -153,7 +196,7 @@ nav a:hover{
     margin-bottom: .2rem;
 }
 
-#student_wrapper, #activities_wrapper {
+#activities_wrapper {
     display: flex;
     flex-direction: column;
 }
@@ -176,9 +219,9 @@ nav a:hover{
 }
 
 table {
-    /* border-collapse: collapse; */
-    margin-left: 1rem;
+    border-collapse: collapse;
     width: max-content;
+    height: max-content;
     border: 2px solid #333333;
 }
 
@@ -190,6 +233,53 @@ td, th {
 
 #student_wrapper > div{
     margin: .5rem 0;
+}
+
+#discussion_main > div{
+    margin: 2rem 0 0 2rem;
+}
+
+.post{
+    margin: 1rem 0;
+    padding: .5rem;
+    background-color: #ECEFF4;
+}
+
+.post p:nth-child(2){
+    margin: .3rem 0;
+    font-size: 13px;
+}
+
+.post p:nth-child(3){
+    margin-top: .5rem;
+}
+
+#your_question {
+    margin-top: 2rem;
+}
+
+#your_question form{
+    margin-top: .3rem;
+    width: 100%;
+    display: flex;
+    align-content: center;
+}
+
+#your_question form textarea{
+    width: 100%;
+    margin-right: .5rem;
+}
+
+#your_question form button{
+    width: 100px;
+    border: 2px solid #333333;
+    background: none;
+    outline: none;
+    transition: .3s ease;
+}
+#your_question form button:hover{
+    color: #fff;
+    background-color: #333333;
 }
 
 

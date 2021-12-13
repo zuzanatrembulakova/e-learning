@@ -28,7 +28,7 @@ try {
 </head>
 <body>
 
-    <main>
+    <main id="signin_main">
         <div id="teacher_list">
             <h1>Preview as teacher</h1>
             <div>

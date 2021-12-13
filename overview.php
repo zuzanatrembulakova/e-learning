@@ -101,91 +101,93 @@ try{
 </head>
 <body>
 
-    <nav>
-        <h2>Discussion</h2>
-        <div>
-            <?php foreach($allTopics as $topic){ ?>
-                <a href="discussion.php?id=<?= $topic['topic_id'] ?>"><?= $topic['topic_name'] ?></a>
-            <?php } ?>
-        </div>
-    </nav>
+<div id="user">
+    <h1>You are logged in as <?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?></h1>
+    <a href="bridge-signout.php">Sign out</a>
+</div>
 
-    <div id="user">
-        <h1>You are logged in as <?= $_SESSION['student']['student_name'] ?> <?= $_SESSION['student']['student_surname'] ?></h1>
-        <a href="bridge-signout.php">Sign out</a>
-    </div>
+<main class="overview_main">
 
-    <div id="overview_wrapper">
-        <div>
-            <h2>Active Topics</h2>
+        <nav>
+            <h2>Discussion menu</h2>
             <div>
-               <?php foreach($activeTopics as $activeTopic){ ?>
-                    <form id="topic_form">
-                        <p><?= $activeTopic['topic_name'] ?></p>
-                        <input type="hidden" name="active_topic_id" value="<?= $activeTopic['topic_id'] ?>">
-                        <button onclick='removeTopic()'>Sign out of topic</button>
-                    </form>
+                <?php foreach($allTopics as $topic){ ?>
+                    <a href="discussion.php?id=<?= $topic['topic_id'] ?>"><?= $topic['topic_name'] ?></a>
                 <?php } ?>
             </div>
+        </nav>
+
+        <div id="overview_student">
             <div>
-                <h3>Start new topic</h3>
-                <form onsubmit="return false" id="form_topic">
-                    <select name="tag">
-                        <?php foreach($newTopics as $newTopic){ ?>
-                            <option value="<?= $newTopic['topic_id'] ?>"><?= $newTopic['topic_name'] ?></option>
-                        <?php } ?>
-                    </select>
-                    <input type="hidden" name="student_id" value="<?= $_SESSION['student']['student_id']; ?>">
-                    <button onclick='chooseTopic()'>start</button>
-                </form>
-            </div>
-        </div>
-
-        <div>
-            <h2>Started activities</h2>
-            <div id="started_activities">
-
-                <?php foreach($rows as $row){ ?>
-                    <form onsubmit="return false" id="form_started_activity">
-                        <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
-                        <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
-                        <input type="hidden" name="topic_id" value="<?= $row['topic_id'] ?>">
-                        <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
-                        <button onclick='finishActivity()'>Done</button>
+                <h2>Active Topics</h2>
+                <div>
+                <?php foreach($activeTopics as $activeTopic){ ?>
+                        <form id="topic_form">
+                            <p><?= $activeTopic['topic_name'] ?></p>
+                            <input type="hidden" name="active_topic_id" value="<?= $activeTopic['topic_id'] ?>">
+                            <button onclick='removeTopic()'>Sign out of topic</button>
+                        </form>
+                    <?php } ?>
+                </div>
+                <div id="new_topic">
+                    <h3>Start new topic</h3>
+                    <form onsubmit="return false" id="form_topic">
+                        <select name="tag">
+                            <?php foreach($newTopics as $newTopic){ ?>
+                                <option value="<?= $newTopic['topic_id'] ?>"><?= $newTopic['topic_name'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <input type="hidden" name="student_id" value="<?= $_SESSION['student']['student_id']; ?>">
+                        <button onclick='chooseTopic()'>start</button>
                     </form>
-                <?php } ?>
+                </div>
+            </div>
 
+            <div>
+                <h2>Started activities</h2>
+                <div id="started_activities">
+
+                    <?php foreach($rows as $row){ ?>
+                        <form onsubmit="return false" id="form_started_activity">
+                            <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
+                            <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
+                            <input type="hidden" name="topic_id" value="<?= $row['topic_id'] ?>">
+                            <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
+                            <button onclick='finishActivity()'>Done</button>
+                        </form>
+                    <?php } ?>
+
+                </div>
+            </div>
+
+            <div>
+                <h2>Finished activities</h2>
+                <div id="started_activities">
+
+                    <?php foreach($finishedActivities as $finishedActivity){ ?>
+                        <form onsubmit="return false" id="form_started_activity">
+                            <a href="one-activity.php?id=<?= $finishedActivity['activity_id'] ?>"><?= $finishedActivity['activity_name'] ?></a>
+                            <p><?php 
+                            
+                            if($finishedActivity['activity_is_graded'] == 1){ 
+                                if($finishedActivity['grade_id']){
+                                    foreach($activtyGrades as $activtyGrade){
+                                        echo $activtyGrade['grade_name'];
+                                    }
+                                } else { ?>
+                                    Grade is pending
+                            <?php }
+
+                            } else { ?> Not graded <?php } ?></p>
+                        </form>
+                    <?php } ?>
+
+                </div>
             </div>
         </div>
+</main>
 
-        <div>
-            <h2>Finished activities</h2>
-            <div id="started_activities">
-
-                <?php foreach($finishedActivities as $finishedActivity){ ?>
-                    <form onsubmit="return false" id="form_started_activity">
-                        <a href="one-activity.php?id=<?= $finishedActivity['activity_id'] ?>"><?= $finishedActivity['activity_name'] ?></a>
-                        <p><?php 
-                        
-                        if($finishedActivity['activity_is_graded'] == 1){ 
-                            if($finishedActivity['grade_id']){
-                                foreach($activtyGrades as $activtyGrade){
-                                    echo $activtyGrade['grade_name'];
-                                }
-                            } else { ?>
-                                Grade is pending
-                           <?php }
-
-                        } else { ?> Not graded <?php } ?></p>
-                    </form>
-                <?php } ?>
-
-            </div>
-        </div>
-
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
