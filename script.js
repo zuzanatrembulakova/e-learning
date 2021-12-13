@@ -110,8 +110,3 @@ async function gradeActivity(){
     }
 }
 
-
-// function displayInput() {
-//     document.querySelector("#your_question").style.display = "block"
-// }
-

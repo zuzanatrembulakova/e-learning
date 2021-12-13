@@ -97,6 +97,7 @@ try{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/b08a3acf90.js" crossorigin="anonymous"></script>
     <title>Choose topic</title>
 </head>
 <body>
@@ -118,17 +119,23 @@ try{
         </nav>
 
         <div id="overview_student">
+
             <div>
-                <h2>Active Topics</h2>
-                <div>
-                <?php foreach($activeTopics as $activeTopic){ ?>
-                        <form id="topic_form">
-                            <p><?= $activeTopic['topic_name'] ?></p>
-                            <input type="hidden" name="active_topic_id" value="<?= $activeTopic['topic_id'] ?>">
-                            <button onclick='removeTopic()'>Sign out of topic</button>
-                        </form>
-                    <?php } ?>
-                </div>
+                <table>
+                    <tr><th>Active Topics<th></tr>
+                    <?php foreach($activeTopics as $activeTopic){ ?>
+                        <tr>
+                            <form id="topic_form">
+                                <td>
+                                    <p><?= $activeTopic['topic_name'] ?></p>
+                                    <input type="hidden" name="active_topic_id" value="<?= $activeTopic['topic_id'] ?>">
+                                </td>
+                                <td><button onclick='removeTopic()'>Sign out of topic</button></td>
+                            </form>
+                        </tr>
+                        <?php } ?>
+                </table>
+
                 <div id="new_topic">
                     <h3>Start new topic</h3>
                     <form onsubmit="return false" id="form_topic">
@@ -143,51 +150,67 @@ try{
                 </div>
             </div>
 
-            <div>
-                <h2>Started activities</h2>
-                <div id="started_activities">
+            <div id="right">
+                <aside>
+                    <div class="aside_title" onclick="foldAside('#started_activities', '#arrow1')">
+                        <h2>Started activities</h2>
+                        <i id="arrow1" class="fas fa-angle-down"></i>
+                    </div>
 
-                    <?php foreach($rows as $row){ ?>
-                        <form onsubmit="return false" id="form_started_activity">
-                            <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
-                            <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
-                            <input type="hidden" name="topic_id" value="<?= $row['topic_id'] ?>">
-                            <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
-                            <button onclick='finishActivity()'>Done</button>
-                        </form>
-                    <?php } ?>
-
-                </div>
-            </div>
-
-            <div>
-                <h2>Finished activities</h2>
-                <div id="started_activities">
-
-                    <?php foreach($finishedActivities as $finishedActivity){ ?>
-                        <form onsubmit="return false" id="form_started_activity">
-                            <a href="one-activity.php?id=<?= $finishedActivity['activity_id'] ?>"><?= $finishedActivity['activity_name'] ?></a>
-                            <p><?php 
+                    <section id="started_activities">
+                        <?php foreach($rows as $row){ ?>
                             
-                            if($finishedActivity['activity_is_graded'] == 1){ 
-                                if($finishedActivity['grade_id']){
-                                    foreach($activtyGrades as $activtyGrade){
-                                        echo $activtyGrade['grade_name'];
-                                    }
-                                } else { ?>
-                                    Grade is pending
-                            <?php }
+                            <form onsubmit="return false" id="form_started_activity">
+                                <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
+                                <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
+                                <input type="hidden" name="topic_id" value="<?= $row['topic_id'] ?>">
+                                <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
 
-                            } else { ?> Not graded <?php } ?></p>
-                        </form>
-                    <?php } ?>
+                                <button onclick='finishActivity()'>Done</button>
+                            </form>
+                            
+                        <?php } ?>
+                    </section>
+                </aside>
+            
+                <aside>
+                    <div class="aside_title" onclick="foldAside('#finished_activities', '#arrow2')">
+                        <h2>Finished activities</h2>
+                        <i id="arrow2" class="fas fa-angle-down"></i>
+                    </div>
 
-                </div>
-            </div>
+                    <section id="finished_activities">
+                        <?php foreach($finishedActivities as $finishedActivity){ ?>
+
+                           <div>
+                                <form onsubmit="return false" id="form_started_activity">
+                                    <a href="one-activity.php?id=<?= $finishedActivity['activity_id'] ?>"><?= $finishedActivity['activity_name'] ?></a>
+                                </form>
+                            
+                                <p><?php 
+                                
+                                if($finishedActivity['activity_is_graded'] == 1){ 
+                                    if($finishedActivity['grade_id']){
+                                        foreach($activtyGrades as $activtyGrade){
+                                            echo $activtyGrade['grade_name'];
+                                        }
+                                    } else { ?>
+                                        Grade is pending
+                                <?php }
+
+                                } else { ?> Not graded <?php } ?></p>
+                             </div>
+                                
+                        <?php } ?>
+
+                    </section>
+                </aside>
+            </div>   
         </div>
 </main>
 
 <script src="script.js"></script>
+<script src="script-overview.js"></script>
 
 </body>
 </html>
