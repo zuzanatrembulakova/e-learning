@@ -4,6 +4,7 @@ require_once(__DIR__.'/globals.php');
 
 $studentid = $_GET['studentid'];
 $topicid = $_GET['topicid'];
+$teacherid = $_GET['teacherid'];
 
 $db = _db();
 
@@ -74,7 +75,7 @@ try {
             if ($activity['activity_is_graded'] == "1"){
         ?>
         <div>
-            <a href="grade-activity.php?activityID=<?= $activity['activity_id'] ?>&studentID=<?= $studentid ?>"><?= $activity['activity_name'] ?></a>
+            <a href="grade-activity.php?activityID=<?= $activity['activity_id'] ?>&studentID=<?= $studentid ?>&teacherID=<?= $teacherid ?>"><?= $activity['activity_name'] ?></a>
             <?php 
             
             if (isset($grade['grade_id'])) { ?>

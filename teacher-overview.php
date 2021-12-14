@@ -101,7 +101,7 @@ try{
 
                                 foreach($students as $student){?>
                                 <div>
-                                    <a href="student-finished-activities.php?studentid=<?= $student['student_id'] ?>&topicid=<?= $topic['topic_id'] ?>"><?= $student['student_name'] ?> <?= $student['student_surname'] ?></a>
+                                    <a href="student-finished-activities.php?studentid=<?= $student['student_id'] ?>&topicid=<?= $topic['topic_id'] ?>&teacherid=<?= $teacherid ?>"><?= $student['student_name'] ?> <?= $student['student_surname'] ?></a>
                                     <?php 
                                     
                                         try {

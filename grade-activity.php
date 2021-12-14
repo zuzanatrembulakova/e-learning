@@ -6,11 +6,13 @@ require_once(__DIR__.'/globals.php');
 
 $activityID = $_GET['activityID'];
 $studentID = $_GET['studentID'];
+$teacherID = $_GET['teacherID'];
 
 $db = _db();
 
 try{
-    $q = $db->prepare('SELECT activities.activity_name, activities.activity_description, students.student_name, students.student_surname, topic_student_activity.topic_student_id FROM activities 
+    $q = $db->prepare('SELECT activities.activity_name, activities.activity_description, students.student_name, 
+    students.student_surname, topic_student_activity.topic_student_id FROM activities 
     INNER JOIN topic_student_activity ON activities.activity_id = topic_student_activity.activity_id
     INNER JOIN topic_student ON topic_student_activity.topic_student_id = topic_student.topic_student_id 
     INNER JOIN students ON topic_student.student_id = students.student_id
@@ -55,6 +57,7 @@ try{
 <form onsubmit="return false" id="form_grades">
         <input type="hidden" name="topic_studentID" value="<?= $row['topic_student_id'] ?>">
         <input type="hidden" name="activityID" value="<?= $activityID ?>">
+        <input type="hidden" name="teacherID" value="<?= $teacherID ?>">
         <select name="grades">
             <?php while ($grade = $q2->fetch()){ ?>
                 <option value="<?= $grade['grade_id'] ?>"><?= $grade['grade_name'] ?></option>

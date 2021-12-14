@@ -96,15 +96,17 @@ async function sendQuestion(){
 }
 
 async function gradeActivity(){
-    const form = event.target.form
+    const gradeForm = new FormData(event.target.form)
+    let teacherid = gradeForm.get('teacherID')
+
     let conn = await fetch("apis/api-grade-activity.php", {
       method: "POST",
-      body: new FormData(form)
+      body: gradeForm
     })
     let res = await conn.json()
     console.log(res)
     if( conn.ok ){ 
-        location.href = "overview.php" 
+        location.href = "teacher-overview.php?id=" + teacherid
     } else {
         alert(res['info'])
     }
