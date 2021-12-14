@@ -24,9 +24,10 @@ try {
 }
 
 try {
-    $q = $db->prepare('SELECT activities.*, topic_student_activity.grade_id FROM activities
+    $q = $db->prepare('SELECT activities.*, topic_student_activity.grade_id, topics.topic_name FROM activities
     INNER JOIN topic_student_activity ON topic_student_activity.activity_id = activities.activity_id
     INNER JOIN topic_student ON topic_student.topic_student_id = topic_student_activity.topic_student_id
+    INNER JOIN topics ON topic_student.topic_id = topics.topic_id 
     WHERE topic_student.student_id = :student_id AND topic_student_activity.activity_end_date IS NOT NULL');
     $q->bindValue(':student_id', $_SESSION['student']['student_id']);
     $q->execute();
@@ -164,8 +165,10 @@ try{
                                 <input type="hidden" name="activity_id" value="<?= $row['activity_id'] ?>">
                                 <input type="hidden" name="topic_student_id" value="<?= $row['topic_student_id'] ?>">
                                 <input type="hidden" name="topic_id" value="<?= $row['topic_id'] ?>">
-                                <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
-
+                                <div>
+                                    <p><?= $row['topic_name'] ?></p>
+                                    <a href="one-activity.php?id=<?= $row['activity_id'] ?>"><?= $row['activity_name'] ?></a>
+                                </div>
                                 <button onclick='finishActivity()'>Done</button>
                             </form>
                             
@@ -184,6 +187,7 @@ try{
 
                            <div>
                                 <form onsubmit="return false" id="form_started_activity">
+                                    <p><?= $finishedActivity['topic_name'] ?></p>
                                     <a href="one-activity.php?id=<?= $finishedActivity['activity_id'] ?>"><?= $finishedActivity['activity_name'] ?></a>
                                 </form>
                             
