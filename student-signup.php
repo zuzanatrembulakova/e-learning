@@ -24,7 +24,7 @@
             <input type="password" name="password" placeholder="At least 6 characters"></input>
             <label>Re-enter password</label>
             <input type="password" name="repeat_password"></input>
-            <button onclick="signup()">Sign up</button>
+            <button id="signup_btn" onclick="signup()">Sign up</button>
         </form>
     </div>
 

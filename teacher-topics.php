@@ -72,7 +72,7 @@ try{
     <table id="topics_wrapper">
         <tr>
             <th>Topic</th>
-            <th>Student list for topic</th>
+            <th>Student list for the topic</th>
         </tr>
         <?php while($topic = $q2->fetch()){ ?>
             <tr class='one_topic'>

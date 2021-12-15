@@ -47,7 +47,7 @@ try{
     <link rel="stylesheet" href="css/style.css">
     <title>Grade activity</title>
 </head>
-<body>
+<body id="one">
 
     <h1>Student: <?= $row['student_name'] ?> <?= $row['student_surname'] ?></h1>
     <h2>Activity: <?= $row['activity_name'] ?></h2>

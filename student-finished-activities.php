@@ -65,7 +65,7 @@ try {
     <link rel="stylesheet" href="css/style.css">
     <title>Student's finished activities</title>
 </head>
-<body>
+<body id="finished">
 
     
     <h1>These are the finished activities for <?= $row['student_name'] ?> <?= $row['student_surname'] ?></h1>

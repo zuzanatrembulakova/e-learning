@@ -40,7 +40,7 @@ try{
     <link rel="stylesheet" href="css/style.css">
     <title>Activity</title>
 </head>
-<body>
+<body id="one">
 
     <h1><?= $row['activity_name'] ?></h1>
     <p><?= $row['activity_description'] ?></p>
@@ -51,7 +51,7 @@ try{
         while($resource = $q2->fetch()){
     ?>
     <p><?= $resource['resource_description'] ?></p>
-    <a href="<?= $resource['resource_link'] ?>"><?= $resource['resource_link'] ?></a>
+    <a id="resource_link" href="<?= $resource['resource_link'] ?>"><?= $resource['resource_link'] ?></a>
     <?php
         }
     ?>
