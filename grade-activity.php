@@ -54,7 +54,7 @@ try{
     <p><?= $row['activity_description'] ?></p>
     
     
-<form onsubmit="return false" id="form_grades">
+    <form onsubmit="return false" id="form_grades">
         <input type="hidden" name="topic_studentID" value="<?= $row['topic_student_id'] ?>">
         <input type="hidden" name="activityID" value="<?= $activityID ?>">
         <input type="hidden" name="teacherID" value="<?= $teacherID ?>">
@@ -65,9 +65,6 @@ try{
         </select>
         <button onclick='gradeActivity()'>Grade</button>
     </form>
-
-
-    
 
     <script src="script.js"></script>
 

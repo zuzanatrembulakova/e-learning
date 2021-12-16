@@ -50,13 +50,11 @@ try{
     <?php
         while($resource = $q2->fetch()){
     ?>
-    <p><?= $resource['resource_description'] ?></p>
-    <a id="resource_link" href="<?= $resource['resource_link'] ?>"><?= $resource['resource_link'] ?></a>
+        <p><?= $resource['resource_description'] ?></p>
+        <a id="resource_link" href="<?= $resource['resource_link'] ?>"><?= $resource['resource_link'] ?></a>
     <?php
         }
     ?>
-    
-
     <script src="script.js"></script>
 
 </body>

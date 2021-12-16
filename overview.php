@@ -39,21 +39,6 @@ try {
     exit(); 
 }
 
-try {
-    $q = $db->prepare('SELECT grades.grade_id, grades.grade_name FROM grades
-    INNER JOIN topic_student_activity ON topic_student_activity.grade_id = grades.grade_id
-    INNER JOIN topic_student ON topic_student_activity.topic_student_id = topic_student.topic_student_id
-    WHERE topic_student.student_id = :student_id');
-    $q->bindValue(':student_id', $_SESSION['student']['student_id']);
-    $q->execute();
-    $activtyGrades = $q->fetchAll();
-
-
-} catch(Exception $ex){
-    _response(500, 'System under maintainance', __LINE__);
-    exit(); 
-}
-
 try{
     $q = $db->prepare('SELECT topics.topic_name, topics.topic_id FROM topics 
     INNER JOIN topic_student ON topics.topic_id = topic_student.topic_id 
@@ -195,8 +180,17 @@ try{
                                 
                                 if($finishedActivity['activity_is_graded'] == 1){ 
                                     if($finishedActivity['grade_id']){
-                                        foreach($activtyGrades as $activtyGrade){
+                                        try {
+                                            $q = $db->prepare('SELECT grade_id, grade_name FROM grades
+                                            WHERE grade_id = :grade_id');
+                                            $q->bindValue(':grade_id', $finishedActivity['grade_id']);
+                                            $q->execute();
+                                            $activtyGrade = $q->fetch();
+                                        
                                             echo $activtyGrade['grade_name'];
+                                        } catch(Exception $ex){
+                                            _response(500, 'System under maintainance', __LINE__);
+                                            exit(); 
                                         }
                                     } else { ?>
                                         Grade is pending
