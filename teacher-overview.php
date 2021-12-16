@@ -62,7 +62,7 @@ try{
 
 <main class="overview_main">
         
-        <nav>
+        <nav class="nav_bar">
             <h2>Discussion menu</h2>
             <div>
                 <?php foreach($allTopics as $topic){ ?>
@@ -130,6 +130,7 @@ try{
 </main>
 
 <script src="script.js"></script>
+<script src="script-overview.js"></script>
 
 </body>
 </html>

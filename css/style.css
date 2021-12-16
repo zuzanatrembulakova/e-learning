@@ -7,6 +7,11 @@ body{
     color: var(--black);
 }
 
+.sticky{
+    position: sticky;
+    top: 0;
+}
+
 a {
     color: #333333;
     transition: .5s;
@@ -93,8 +98,9 @@ button{
 
 nav{
     width: max-content;
-    height: 100vh;
+    height: 95.5vh;
     border-right: 2px solid #333333;
+    background-color: #fff;
     padding-top: 2rem;
     padding-left: 1rem;
     padding-right: 2rem;
